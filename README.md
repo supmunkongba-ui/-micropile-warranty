@@ -1,2 +1,0 @@
-# -micropile-warranty
-ใบรับประกัน
