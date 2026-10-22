@@ -79,16 +79,19 @@
 
     /* A4 Document Simulation */
     .a4-wrapper { width: 100%; max-width: 820px; display: flex; justify-content: center; }
-    .a4-document { width: 210mm; min-height: 297mm; background: #ffffff; padding: 22mm 20mm 24mm 20mm; box-shadow: 0 10px 25px rgba(0,0,0,0.25); display: flex; flex-direction: column; color: #000; box-sizing: border-box; margin-bottom: 30px; }
+    .a4-document { width: 210mm; min-height: 297mm; background: #ffffff; padding: 22mm 20mm 24mm 20mm; box-shadow: 0 10px 25px rgba(0,0,0,0.25); display: flex; flex-direction: column; color: #000; box-sizing: border-box; margin-bottom: 30px; overflow: hidden; }
     @media (max-width: 850px) { .a4-document { width: 100%; min-height: auto; padding: 18px 16px; } }
 
-    .doc-top-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
-    .doc-logo-box { width: 130px; text-align: left; }
+    .doc-top-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; width: 100%; }
+    .doc-logo-box { width: 130px; text-align: left; flex-shrink: 0; }
     .doc-logo-box img { max-width: 100%; max-height: 95px; object-fit: contain; }
-    .doc-top-info { text-align: right; font-size: 11pt; color: #475569; line-height: 1.5; }
+    .doc-top-info { text-align: right; font-size: 11pt; color: #475569; line-height: 1.5; flex: 1; }
     .doc-top-info strong { color: #1e293b; font-size: 12pt; }
     .doc-title { text-align: center; font-size: 24pt; font-weight: 700; margin: 15px 0 25px 0; text-decoration: underline; text-underline-offset: 6px; }
-    .doc-body { font-size: 14pt; line-height: 1.85; text-align: justify; text-indent: 45px; margin-bottom: 20px; }
+    
+    /* แก้ปัญหาตัวหนังสือซ้อนกัน: เปลี่ยนจาก text-align: justify เป็น left */
+    .doc-body { font-size: 14pt; line-height: 1.85; text-align: left; text-indent: 45px; margin-bottom: 20px; }
+    
     .doc-photos-grid { display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 15px 0; width: 100%; }
     
     .doc-photo-card { width: 100%; max-width: 520px; text-align: center; page-break-inside: avoid; break-inside: avoid; }
@@ -582,31 +585,36 @@
       }
     }
 
-    // --- ส่วนที่แก้ไขบั๊กหน้ากระดาษ PDF (อัปเดตฟังก์ชันนี้) ---
+    // --- ส่วนที่แก้ไขบั๊กหน้ากระดาษ PDF รอบใหม่ ---
     function handlePrintOrPdf() {
       const previewPane = document.getElementById('previewPane');
       const wasHidden = previewPane.classList.contains('tab-hidden');
       if (wasHidden) previewPane.classList.remove('tab-hidden');
 
-      // 1. เลื่อนทุก Scroll กลับไปบนสุด เพื่อป้องกัน html2canvas แคปติดพื้นที่ว่าง
+      // เลื่อน Scroll กลับบนสุด
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       previewPane.scrollTop = 0;
       
-      // 2. ปิด overflow ชั่วคราวไม่ให้คอนเทนเนอร์มีแถบเลื่อนตอนแคปเจอร์
       const originalOverflow = previewPane.style.overflow;
       const originalHeight = previewPane.style.height;
       previewPane.style.overflow = 'visible';
       previewPane.style.height = 'auto';
 
-      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       const element = document.getElementById('printArea');
       const cust = document.getElementById('inpCustName').value || 'ลูกค้า';
 
+      // แก้บั๊กข้อความขาดด้านขวา: บังคับให้ Element กว้างเท่ากระดาษ A4 เสมอ (794px)
+      const originalWidth = element.style.width;
+      const originalMaxWidth = element.style.maxWidth;
+      element.style.width = '794px';
+      element.style.maxWidth = '794px';
+
+      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
       if (isMobile) {
         const opt = {
-          // ใช้ margin เป็น 0 เพราะคลาส .a4-document มี Padding กั้นขอบไว้อยู่แล้ว
-          margin:       [0, 0, 0, 0],
+          margin:       0,
           filename:     `ใบรับประกัน_${cust}.pdf`,
           image:        { type: 'jpeg', quality: 0.98 },
           pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] },
@@ -616,23 +624,26 @@
             scrollX: 0, 
             useCORS: true,
             allowTaint: true,
-            // 3. บังคับเรนเดอร์ในโหมด Desktop เสมอ ป้องกัน CSS โหมดมือถือทำให้หน้า A4 เพี้ยน
-            windowWidth: 1024 
+            width: 794, // แจ้งให้ canvas ทราบว่าความกว้างเป้าหมายคือ 794px
+            windowWidth: 850 
           },
           jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         alert('กำลังประมวลผลไฟล์ PDF หน้า A4 กรุณารอสักครู่...');
         
-        // 4. หน่วงเวลาเพิ่มเป็น 500ms ให้เบราว์เซอร์จัดการ Scroll และ DOM ให้เสร็จก่อนแคปเจอร์
         setTimeout(() => {
           html2pdf().set(opt).from(element).save().then(() => {
-            // คืนค่า Scroll ปกติ
+            // คืนค่าหน้าจอ
+            element.style.width = originalWidth;
+            element.style.maxWidth = originalMaxWidth;
             previewPane.style.overflow = originalOverflow;
             previewPane.style.height = originalHeight;
             if (wasHidden) previewPane.classList.add('tab-hidden');
           }).catch(err => {
             alert('เกิดข้อผิดพลาดในการโหลดรูปภาพ แนะนำให้เปิดผ่านเบราว์เซอร์ Chrome โดยตรงครับ');
+            element.style.width = originalWidth;
+            element.style.maxWidth = originalMaxWidth;
             previewPane.style.overflow = originalOverflow;
             previewPane.style.height = originalHeight;
             if (wasHidden) previewPane.classList.add('tab-hidden');
@@ -640,6 +651,8 @@
         }, 500);
       } else {
         window.print();
+        element.style.width = originalWidth;
+        element.style.maxWidth = originalMaxWidth;
         previewPane.style.overflow = originalOverflow;
         previewPane.style.height = originalHeight;
         if (wasHidden) previewPane.classList.add('tab-hidden');
