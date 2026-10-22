@@ -307,7 +307,6 @@
           
           <div class="doc-top-header">
             <div class="doc-logo-box">
-              <!-- แก้ไขบั๊กกล่องสีเทา: ระบุ Width/Height คงที่ให้ SVG ใน Base64 อย่างชัดเจน -->
               <img id="docLogoImg" alt="โลโก้บริษัท">
             </div>
             <div class="doc-top-info">
@@ -321,7 +320,6 @@
           <div class="doc-body" id="docBodyContent"></div>
 
           <div class="doc-photos-grid" id="docPhotosContainer">
-            <!-- แก้ไขบั๊กรูปล่องหน: นำรูปภายนอกออก เปลี่ยนเป็นกราฟิกจำลองภายใน ป้องกันติด CORS -->
             <div class="mock-photo-area" id="mockPhotoCard">
               <i class="fa-solid fa-images" style="font-size: 2.5rem; margin-bottom: 10px; color: #cbd5e1;"></i><br>
               [ พื้นที่แสดงรูปภาพหน้างาน ]<br>
@@ -388,7 +386,6 @@
     let uploadedPhotos = [];
     let savedRecords = JSON.parse(localStorage.getItem('warranty_records') || '{}');
 
-    // Default Logo: เปลี่ยนโค้ด Width/Height ของ SVG ให้ตายตัว ป้องกัน html2canvas คืนค่ากล่องสีเทา
     const defaultLogoSVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="400" height="440">
         <rect width="400" height="440" rx="20" fill="#4a4f55"/>
@@ -417,7 +414,6 @@
 
     let currentLogoSrc = defaultLogoSVG;
 
-    // บีบอัดรูป
     function compressImage(file, maxWidth, quality, callback) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -586,22 +582,31 @@
       }
     }
 
-    // PDF 
+    // --- ส่วนที่แก้ไขบั๊กหน้ากระดาษ PDF (อัปเดตฟังก์ชันนี้) ---
     function handlePrintOrPdf() {
       const previewPane = document.getElementById('previewPane');
       const wasHidden = previewPane.classList.contains('tab-hidden');
       if (wasHidden) previewPane.classList.remove('tab-hidden');
 
+      // 1. เลื่อนทุก Scroll กลับไปบนสุด เพื่อป้องกัน html2canvas แคปติดพื้นที่ว่าง
       window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      previewPane.scrollTop = 0;
+      
+      // 2. ปิด overflow ชั่วคราวไม่ให้คอนเทนเนอร์มีแถบเลื่อนตอนแคปเจอร์
+      const originalOverflow = previewPane.style.overflow;
+      const originalHeight = previewPane.style.height;
+      previewPane.style.overflow = 'visible';
+      previewPane.style.height = 'auto';
 
       const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       const element = document.getElementById('printArea');
       const cust = document.getElementById('inpCustName').value || 'ลูกค้า';
 
       if (isMobile) {
-        // เพิ่มตั้งค่าให้ดึงรูปได้อย่างสมบูรณ์ (allowTaint: true)
         const opt = {
-          margin:       [10, 10, 10, 10],
+          // ใช้ margin เป็น 0 เพราะคลาส .a4-document มี Padding กั้นขอบไว้อยู่แล้ว
+          margin:       [0, 0, 0, 0],
           filename:     `ใบรับประกัน_${cust}.pdf`,
           image:        { type: 'jpeg', quality: 0.98 },
           pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] },
@@ -611,25 +616,36 @@
             scrollX: 0, 
             useCORS: true,
             allowTaint: true,
-            windowWidth: 794 
+            // 3. บังคับเรนเดอร์ในโหมด Desktop เสมอ ป้องกัน CSS โหมดมือถือทำให้หน้า A4 เพี้ยน
+            windowWidth: 1024 
           },
           jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         alert('กำลังประมวลผลไฟล์ PDF หน้า A4 กรุณารอสักครู่...');
+        
+        // 4. หน่วงเวลาเพิ่มเป็น 500ms ให้เบราว์เซอร์จัดการ Scroll และ DOM ให้เสร็จก่อนแคปเจอร์
         setTimeout(() => {
           html2pdf().set(opt).from(element).save().then(() => {
+            // คืนค่า Scroll ปกติ
+            previewPane.style.overflow = originalOverflow;
+            previewPane.style.height = originalHeight;
             if (wasHidden) previewPane.classList.add('tab-hidden');
           }).catch(err => {
-            alert('เกิดข้อผิดพลาดในการโหลดรูปภาพ ให้เปิดผ่านเบราว์เซอร์ Chrome โดยตรงครับ');
+            alert('เกิดข้อผิดพลาดในการโหลดรูปภาพ แนะนำให้เปิดผ่านเบราว์เซอร์ Chrome โดยตรงครับ');
+            previewPane.style.overflow = originalOverflow;
+            previewPane.style.height = originalHeight;
             if (wasHidden) previewPane.classList.add('tab-hidden');
           });
-        }, 300);
+        }, 500);
       } else {
         window.print();
+        previewPane.style.overflow = originalOverflow;
+        previewPane.style.height = originalHeight;
         if (wasHidden) previewPane.classList.add('tab-hidden');
       }
     }
+    // --------------------------------------------------------
 
     function getCurrentFormData() {
       return {
