@@ -22,41 +22,32 @@
       --card-bg: #ffffff;
       --border-color: #cbd5e1;
       --text-main: #334155;
-      --text-muted: #64748b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Sarabun', sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-    /* Top Navigation Bar */
     header { background-color: var(--secondary); color: #fff; padding: 12px 18px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.15); }
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .brand-title { display: flex; align-items: center; gap: 12px; }
-    .brand-icon { background: #e02424; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #fff; box-shadow: 0 2px 4px rgba(224,36,36,0.3); }
-    .brand-text h1 { font-size: 1.05rem; font-weight: 700; line-height: 1.25; letter-spacing: 0.2px; }
+    .brand-icon { background: #e02424; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #fff; }
+    .brand-text h1 { font-size: 1.05rem; font-weight: 700; line-height: 1.25; }
     .brand-text p { font-size: 0.75rem; color: #94a3b8; }
     .badge-online { background: rgba(224, 36, 36, 0.15); border: 1px solid rgba(224, 36, 36, 0.4); color: #fca5a5; font-size: 0.72rem; padding: 4px 10px; border-radius: 6px; text-align: center; font-weight: 600; line-height: 1.2; }
 
-    /* Buttons */
     .btn-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .btn { padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid transparent; transition: all 0.2s; text-decoration: none; }
     .btn-primary { background-color: var(--primary); color: white; }
     .btn-primary:hover { background-color: var(--primary-dark); }
     .btn-success { background-color: #16a34a; color: white; }
-    .btn-success:hover { background-color: #15803d; }
     .btn-history { background-color: #0284c7; color: white; }
-    .btn-history:hover { background-color: #0369a1; }
     .btn-outline { background-color: #1e293b; color: #fff; border-color: #475569; }
-    .btn-outline:hover { background-color: #334155; }
     .btn-danger-sm { background: #fee2e2; color: #ef4444; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
-    .btn-danger-sm:hover { background: #fecaca; }
 
-    /* Mobile Tabs */
     .mobile-tabs { display: flex; background: #ffffff; border-bottom: 2px solid #e2e8f0; position: sticky; top: 115px; z-index: 90; }
-    .tab-btn { flex: 1; padding: 13px 10px; text-align: center; font-size: 0.95rem; font-weight: 700; color: #64748b; background: none; border: none; cursor: pointer; border-bottom: 3px solid transparent; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
+    .tab-btn { flex: 1; padding: 13px 10px; text-align: center; font-size: 0.95rem; font-weight: 700; color: #64748b; background: none; border: none; cursor: pointer; border-bottom: 3px solid transparent; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: #fff; }
 
-    /* Layout */
     .app-container { display: flex; flex: 1; position: relative; }
     .editor-pane { width: 100%; max-width: 540px; background: var(--card-bg); padding: 20px; overflow-y: auto; }
     .preview-pane { flex: 1; background-color: #525659; padding: 25px 20px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
@@ -73,17 +64,15 @@
       .preview-pane { height: calc(100vh - 120px); }
     }
 
-    /* Forms */
     .form-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
     .form-section-title { font-size: 0.98rem; font-weight: 700; color: var(--secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
     .form-group { margin-bottom: 14px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     label { display: block; font-size: 0.85rem; font-weight: 600; color: #475569; margin-bottom: 5px; }
-    input[type="text"], textarea, select { width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; color: #1e293b; outline: none; transition: border-color 0.2s; }
-    input:focus, textarea:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(201, 42, 42, 0.15); }
+    input[type="text"], textarea, select { width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; color: #1e293b; outline: none; }
+    input:focus, textarea:focus { border-color: var(--primary); }
     textarea { resize: vertical; min-height: 85px; line-height: 1.55; }
 
-    /* Photo Items */
     .photo-upload-item { display: flex; gap: 10px; align-items: center; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 8px; }
     .photo-thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
     .sig-canvas-box { border: 1px dashed #cbd5e1; border-radius: 6px; background: #fff; margin-top: 4px; touch-action: none; width: 100%; height: 110px; }
@@ -93,7 +82,6 @@
     .a4-document { width: 210mm; min-height: 297mm; background: #ffffff; padding: 22mm 20mm 24mm 20mm; box-shadow: 0 10px 25px rgba(0,0,0,0.25); display: flex; flex-direction: column; color: #000; box-sizing: border-box; margin-bottom: 30px; }
     @media (max-width: 850px) { .a4-document { width: 100%; min-height: auto; padding: 18px 16px; } }
 
-    /* Document Content */
     .doc-top-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
     .doc-logo-box { width: 130px; text-align: left; }
     .doc-logo-box img { max-width: 100%; max-height: 95px; object-fit: contain; }
@@ -103,27 +91,27 @@
     .doc-body { font-size: 14pt; line-height: 1.85; text-align: justify; text-indent: 45px; margin-bottom: 20px; }
     .doc-photos-grid { display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 15px 0; width: 100%; }
     
-    /* Prevent page breaks inside cards and signatures */
     .doc-photo-card { width: 100%; max-width: 520px; text-align: center; page-break-inside: avoid; break-inside: avoid; }
     .doc-photo-card img { width: 100%; max-height: 380px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px; }
     .doc-photo-caption { font-size: 12pt; color: #333; margin-top: 6px; font-weight: 500; }
-    .doc-signatures { margin-top: auto; padding-top: 35px; display: flex; justify-content: space-between; page-break-inside: avoid; break-inside: avoid; }
     
+    /* Mock Photo Area */
+    .mock-photo-area { background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 8px; width: 100%; max-width: 520px; padding: 40px 20px; text-align: center; color: #94a3b8; }
+
+    .doc-signatures { margin-top: auto; padding-top: 35px; display: flex; justify-content: space-between; page-break-inside: avoid; break-inside: avoid; }
     .sig-column { width: 46%; text-align: center; font-size: 12pt; line-height: 1.6; }
     .sig-line { display: flex; align-items: flex-end; justify-content: center; min-height: 75px; margin-bottom: 8px; position: relative; }
     .sig-line img { max-height: 70px; max-width: 165px; position: absolute; bottom: 5px; }
     .dots { border-bottom: 1px dotted #333; width: 150px; display: inline-block; margin: 0 4px; }
 
-    /* Modal History */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 999; display: none; justify-content: center; align-items: center; padding: 16px; }
     .modal-content { background: #fff; border-radius: 10px; width: 100%; max-width: 820px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25); }
     .modal-header { padding: 16px 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
     .modal-body { padding: 18px 20px; overflow-y: auto; flex: 1; }
-    .table-container { overflow-x: auto; width: 100%; } /* รองรับตารางล้นจอ */
+    .table-container { overflow-x: auto; width: 100%; }
     .history-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 500px; }
     .history-table th, .history-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: left; }
     .history-table th { background: #f8fafc; font-weight: 700; color: #475569; }
-    .history-table tr:hover { background: #f8fafc; }
 
     @media print {
       body { background: transparent !important; margin: 0; padding: 0; }
@@ -135,7 +123,6 @@
 </head>
 <body>
 
-  <!-- แถบด้านบนสุด -->
   <header>
     <div class="header-top">
       <div class="brand-title">
@@ -158,19 +145,16 @@
       <button class="btn btn-outline" onclick="exportData()">
         <i class="fa-solid fa-download"></i> สำรองไฟล์
       </button>
-      
       <label for="fileImporter" class="btn btn-outline" style="cursor: pointer; margin:0;">
         <i class="fa-solid fa-upload"></i> โหลดไฟล์
       </label>
       <input type="file" id="fileImporter" accept=".json" style="position:fixed; top:-100em;" onchange="importData(event)">
-
       <button class="btn btn-primary" onclick="handlePrintOrPdf()">
         <i class="fa-solid fa-file-pdf"></i> พิมพ์ / ดาวน์โหลด PDF
       </button>
     </div>
   </header>
 
-  <!-- แท็บสลับหน้าจอบนมือถือ -->
   <div class="mobile-tabs">
     <button class="tab-btn active" id="tabBtnForm" onclick="switchTab('form')">
       <i class="fa-solid fa-pen-to-square"></i> กรอกข้อมูล
@@ -181,8 +165,6 @@
   </div>
 
   <div class="app-container">
-    
-    <!-- ฝั่งที่ 1: ส่วนกรอกข้อมูล (Editor Pane) -->
     <div class="editor-pane" id="formPane">
       
       <div class="form-section">
@@ -304,13 +286,11 @@
 
       <div class="form-section">
         <div class="form-section-title"><i class="fa-solid fa-signature"></i> 7. ลายเซ็นดิจิทัล</div>
-        
         <div style="margin-bottom: 16px;">
           <label style="color:#c92a2a; font-weight:700;"><i class="fa-solid fa-pen"></i> ลายเซ็นฝ่ายผู้รับจ้าง</label>
           <canvas id="sigCanvasContractor" class="sig-canvas-box" width="380" height="110"></canvas>
           <button class="btn-danger-sm" style="margin-top:4px;" onclick="clearContractorSig()"><i class="fa-solid fa-eraser"></i> ล้างลายเซ็นผู้รับจ้าง</button>
         </div>
-
         <div>
           <label style="color:#0284c7; font-weight:700;"><i class="fa-solid fa-pen"></i> ลายเซ็นฝ่ายผู้ว่าจ้าง</label>
           <canvas id="sigCanvasClient" class="sig-canvas-box" width="380" height="110"></canvas>
@@ -327,6 +307,7 @@
           
           <div class="doc-top-header">
             <div class="doc-logo-box">
+              <!-- แก้ไขบั๊กกล่องสีเทา: ระบุ Width/Height คงที่ให้ SVG ใน Base64 อย่างชัดเจน -->
               <img id="docLogoImg" alt="โลโก้บริษัท">
             </div>
             <div class="doc-top-info">
@@ -340,9 +321,11 @@
           <div class="doc-body" id="docBodyContent"></div>
 
           <div class="doc-photos-grid" id="docPhotosContainer">
-            <div class="doc-photo-card" id="mockPhotoCard">
-              <img src="https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=800&q=80" alt="รูปประกอบ">
-              <div class="doc-photo-caption">รูปประกอบการติดตั้งและกดเสาเข็มเพื่อแก้ไขฐานราก</div>
+            <!-- แก้ไขบั๊กรูปล่องหน: นำรูปภายนอกออก เปลี่ยนเป็นกราฟิกจำลองภายใน ป้องกันติด CORS -->
+            <div class="mock-photo-area" id="mockPhotoCard">
+              <i class="fa-solid fa-images" style="font-size: 2.5rem; margin-bottom: 10px; color: #cbd5e1;"></i><br>
+              [ พื้นที่แสดงรูปภาพหน้างาน ]<br>
+              <span style="font-size: 0.9rem; font-weight: 400;">อัปโหลดรูปภาพในหมวดที่ 6 รูปจะปรากฏที่นี่</span>
             </div>
           </div>
 
@@ -371,7 +354,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- Modal หน้าต่างประวัติย้อนหลัง -->
@@ -406,9 +388,9 @@
     let uploadedPhotos = [];
     let savedRecords = JSON.parse(localStorage.getItem('warranty_records') || '{}');
 
-    // Default Logo SVG ของ หาดใหญ่ ไมโครไพล์
+    // Default Logo: เปลี่ยนโค้ด Width/Height ของ SVG ให้ตายตัว ป้องกัน html2canvas คืนค่ากล่องสีเทา
     const defaultLogoSVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="100%" height="100%">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="400" height="440">
         <rect width="400" height="440" rx="20" fill="#4a4f55"/>
         <g transform="translate(40, 20)">
           <polygon points="40,240 40,110 90,80 90,240" fill="#f97316"/>
@@ -435,7 +417,7 @@
 
     let currentLogoSrc = defaultLogoSVG;
 
-    // ฟังก์ชันบีบอัดรูปภาพก่อนบันทึก ป้องกัน Storage เต็ม
+    // บีบอัดรูป
     function compressImage(file, maxWidth, quality, callback) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -459,36 +441,26 @@
       }
     }
 
-    // ระบบสลับแท็บบนมือถือ
     function switchTab(tab) {
       const formPane = document.getElementById('formPane');
       const previewPane = document.getElementById('previewPane');
       const btnForm = document.getElementById('tabBtnForm');
       const btnPreview = document.getElementById('tabBtnPreview');
-
       if (tab === 'form') {
-        formPane.classList.remove('tab-hidden');
-        previewPane.classList.add('tab-hidden');
-        btnForm.classList.add('active');
-        btnPreview.classList.remove('active');
+        formPane.classList.remove('tab-hidden'); previewPane.classList.add('tab-hidden');
+        btnForm.classList.add('active'); btnPreview.classList.remove('active');
       } else {
-        formPane.classList.add('tab-hidden');
-        previewPane.classList.remove('tab-hidden');
-        btnPreview.classList.add('active');
-        btnForm.classList.remove('active');
+        formPane.classList.add('tab-hidden'); previewPane.classList.remove('tab-hidden');
+        btnPreview.classList.add('active'); btnForm.classList.remove('active');
       }
     }
 
-    // ลายเซ็นดิจิทัล 2 ฝ่าย
     function setupSignaturePad(canvasId, imgId) {
       const cvs = document.getElementById(canvasId);
       const ctx = cvs.getContext('2d');
       const img = document.getElementById(imgId);
       let drawing = false;
-
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.strokeStyle = '#0f172a';
 
       function getCoords(e) {
         const rect = cvs.getBoundingClientRect();
@@ -496,30 +468,21 @@
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
         return { x: clientX - rect.left, y: clientY - rect.top };
       }
-
       function start(e) { drawing = true; const { x, y } = getCoords(e); ctx.beginPath(); ctx.moveTo(x, y); e.preventDefault(); }
       function move(e) { if (!drawing) return; const { x, y } = getCoords(e); ctx.lineTo(x, y); ctx.stroke(); e.preventDefault(); img.src = cvs.toDataURL('image/png'); img.style.display = 'block'; }
       function end() { if (drawing) { drawing = false; img.src = cvs.toDataURL('image/png'); img.style.display = 'block'; } }
 
-      cvs.addEventListener('mousedown', start);
-      cvs.addEventListener('mousemove', move);
-      window.addEventListener('mouseup', end);
-      cvs.addEventListener('touchstart', start, { passive: false });
-      cvs.addEventListener('touchmove', move, { passive: false });
-      window.addEventListener('touchend', end);
+      cvs.addEventListener('mousedown', start); cvs.addEventListener('mousemove', move); window.addEventListener('mouseup', end);
+      cvs.addEventListener('touchstart', start, { passive: false }); cvs.addEventListener('touchmove', move, { passive: false }); window.addEventListener('touchend', end);
 
       return {
         clear: () => { ctx.clearRect(0, 0, cvs.width, cvs.height); img.style.display = 'none'; img.src = ''; },
-        setImage: (dataUrl) => {
-          if (dataUrl && dataUrl.startsWith('data:image')) { img.src = dataUrl; img.style.display = 'block'; }
-          else { img.style.display = 'none'; img.src = ''; }
-        }
+        setImage: (dataUrl) => { if (dataUrl && dataUrl.startsWith('data:image')) { img.src = dataUrl; img.style.display = 'block'; } else { img.style.display = 'none'; img.src = ''; } }
       };
     }
 
     const contractorPad = setupSignaturePad('sigCanvasContractor', 'contractorSigImg');
     const clientPad = setupSignaturePad('sigCanvasClient', 'clientSigImg');
-
     function clearContractorSig() { contractorPad.clear(); }
     function clearClientSig() { clientPad.clear(); }
 
@@ -546,14 +509,11 @@
       const ref = document.getElementById('inpRefNote').value.trim();
 
       const text = `สัญญาที่ทำขึ้น ณ ${comp} เมื่อวันที่ ${date} สำนักงานเลขที่ ${addr} ทำขึ้นเพื่อใช้ในการรับประกัน${purpose}นาน ${period} เริ่มตั้งแต่วันที่ ${dStart} – ${dEnd} ซึ่งทาง ${comp} ได้รับ${work} ของ ${cust} ที่อยู่ ${site} ${ref}`;
-      
       document.getElementById('inpContractBody').value = text;
       document.getElementById('docBodyContent').innerText = text;
     }
 
-    function updateDocument() {
-      document.getElementById('docTitle').innerText = document.getElementById('inpDocTitle').value;
-    }
+    function updateDocument() { document.getElementById('docTitle').innerText = document.getElementById('inpDocTitle').value; }
 
     function updateAll() {
       const compName = document.getElementById('inpCompNameTH').value;
@@ -567,11 +527,9 @@
       document.getElementById('lblHeaderAddress').innerText = addr;
       document.getElementById('lblCompNameBottom').innerText = compName;
       document.getElementById('lblBottomPhone').innerText = phone;
-
       document.getElementById('lblSignerName').innerText = document.getElementById('inpSignerName').value;
       document.getElementById('lblCustName').innerText = custName;
       document.getElementById('lblBottomCustPhone').innerText = custPhone;
-
       generateContractText();
     }
 
@@ -582,13 +540,8 @@
       if (mockCard) mockCard.style.display = 'none';
 
       files.forEach(file => {
-        // บีบอัดภาพหน้างานไม่เกินกว้าง 800px คุณภาพ 75%
         compressImage(file, 800, 0.75, function(compressedData) {
-          uploadedPhotos.push({
-            id: Date.now() + Math.random(),
-            src: compressedData,
-            caption: file.name
-          });
+          uploadedPhotos.push({ id: Date.now() + Math.random(), src: compressedData, caption: file.name });
           renderPhotos();
         });
       });
@@ -606,10 +559,7 @@
 
     function updateCaption(id, value) {
       const item = uploadedPhotos.find(p => p.id === id);
-      if (item) {
-        item.caption = value;
-        renderPhotos(false);
-      }
+      if (item) { item.caption = value; renderPhotos(false); }
     }
 
     function renderPhotos(refreshInputs = true) {
@@ -620,10 +570,7 @@
       uploadedPhotos.forEach((photo) => {
         const card = document.createElement('div');
         card.className = 'doc-photo-card dynamic-photo-card';
-        card.innerHTML = `
-          <img src="${photo.src}" alt="ภาพหน้างาน">
-          <div class="doc-photo-caption">${photo.caption}</div>
-        `;
+        card.innerHTML = `<img src="${photo.src}" alt="ภาพหน้างาน"><div class="doc-photo-caption">${photo.caption}</div>`;
         docContainer.appendChild(card);
       });
 
@@ -633,23 +580,18 @@
         uploadedPhotos.forEach(photo => {
           const div = document.createElement('div');
           div.className = 'photo-upload-item';
-          div.innerHTML = `
-            <img src="${photo.src}" class="photo-thumb">
-            <input type="text" value="${photo.caption}" placeholder="คำบรรยายภาพ" oninput="updateCaption(${photo.id}, this.value)" style="flex:1;">
-            <button class="btn-danger-sm" onclick="removePhoto(${photo.id})"><i class="fa-solid fa-trash"></i></button>
-          `;
+          div.innerHTML = `<img src="${photo.src}" class="photo-thumb"><input type="text" value="${photo.caption}" placeholder="คำบรรยายภาพ" oninput="updateCaption(${photo.id}, this.value)" style="flex:1;"><button class="btn-danger-sm" onclick="removePhoto(${photo.id})"><i class="fa-solid fa-trash"></i></button>`;
           listMgr.appendChild(div);
         });
       }
     }
 
-    // ----------------- แก้ไขบั๊ก PDF หน้าแรกว่างเปล่า & ป้องกันหน้าขาด -----------------
+    // PDF 
     function handlePrintOrPdf() {
       const previewPane = document.getElementById('previewPane');
       const wasHidden = previewPane.classList.contains('tab-hidden');
       if (wasHidden) previewPane.classList.remove('tab-hidden');
 
-      // เลื่อนหน้าจอกลับด้านบนสุดทันทีเพื่อล้างบั๊กพื้นที่ว่างสีขาวจาก html2canvas
       window.scrollTo(0, 0);
 
       const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -657,35 +599,38 @@
       const cust = document.getElementById('inpCustName').value || 'ลูกค้า';
 
       if (isMobile) {
+        // เพิ่มตั้งค่าให้ดึงรูปได้อย่างสมบูรณ์ (allowTaint: true)
         const opt = {
-          margin:       [10, 10, 10, 10], // Margin ขอบกระดาษ
+          margin:       [10, 10, 10, 10],
           filename:     `ใบรับประกัน_${cust}.pdf`,
           image:        { type: 'jpeg', quality: 0.98 },
-          pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }, // ป้องกันรูปลงมาตัดขาดครึ่ง
+          pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] },
           html2canvas:  { 
             scale: 2, 
             scrollY: 0, 
             scrollX: 0, 
             useCORS: true,
-            windowWidth: 794 // ตรึงขนาดความกว้าง A4 มาตรฐาน ป้องกันเพี้ยนบนมือถือ
+            allowTaint: true,
+            windowWidth: 794 
           },
           jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         alert('กำลังประมวลผลไฟล์ PDF หน้า A4 กรุณารอสักครู่...');
-        html2pdf().set(opt).from(element).save().then(() => {
-          if (wasHidden) previewPane.classList.add('tab-hidden');
-        }).catch(err => {
-          alert('เกิดข้อผิดพลาด ให้เปิดผ่านเบราว์เซอร์ Chrome โดยตรงครับ');
-          if (wasHidden) previewPane.classList.add('tab-hidden');
-        });
+        setTimeout(() => {
+          html2pdf().set(opt).from(element).save().then(() => {
+            if (wasHidden) previewPane.classList.add('tab-hidden');
+          }).catch(err => {
+            alert('เกิดข้อผิดพลาดในการโหลดรูปภาพ ให้เปิดผ่านเบราว์เซอร์ Chrome โดยตรงครับ');
+            if (wasHidden) previewPane.classList.add('tab-hidden');
+          });
+        }, 300);
       } else {
         window.print();
         if (wasHidden) previewPane.classList.add('tab-hidden');
       }
     }
 
-    // ----------------- STORAGE SYSTEM & HISTORY MODAL -----------------
     function getCurrentFormData() {
       return {
         id: 'REC_' + Date.now(),
@@ -719,7 +664,6 @@
       document.getElementById('inpDocTitle').value = data.title || '';
       currentLogoSrc = data.logoSrc || defaultLogoSVG;
       document.getElementById('docLogoImg').src = currentLogoSrc;
-
       document.getElementById('inpCompNameTH').value = data.compTH || '';
       document.getElementById('inpCompNameEN').value = data.compEN || '';
       document.getElementById('inpCompPhone').value = data.compPhone || '080-4549659';
@@ -740,65 +684,42 @@
 
       uploadedPhotos = data.photos || [];
       const mockCard = document.getElementById('mockPhotoCard');
-      if (uploadedPhotos.length > 0 && mockCard) {
-        mockCard.style.display = 'none';
-      }
+      if (uploadedPhotos.length > 0 && mockCard) mockCard.style.display = 'none';
       renderPhotos(true);
 
       contractorPad.setImage(data.contractorSig);
       clientPad.setImage(data.clientSig);
 
       updateAll();
-      if (data.contractBody) {
-        document.getElementById('docBodyContent').innerText = data.contractBody;
-      }
+      if (data.contractBody) document.getElementById('docBodyContent').innerText = data.contractBody;
     }
 
     function saveRecord() {
       const data = getCurrentFormData();
       const recordKey = `${data.cust || 'ไม่มีชื่อ'} (${data.contractDate || 'ไม่ระบุวันที่'})`;
-      
       try {
         savedRecords[recordKey] = data;
         localStorage.setItem('warranty_records', JSON.stringify(savedRecords));
-        updateHistoryBadge();
+        document.getElementById('historyCount').innerText = Object.keys(savedRecords).length;
         alert(`บันทึกข้อมูลสัญญา "${recordKey}" เรียบร้อยแล้ว!`);
       } catch (e) {
-        // แจ้งเตือนหากพื้นที่ LocalStorage เต็ม
-        alert("คำเตือน: พื้นที่ความจำในเครื่องเต็ม ไม่สามารถบันทึกเพิ่มได้ กรุณากดปุ่ม 'สำรองไฟล์' เพื่อเก็บประวัติไว้ แล้วจึงลบข้อมูลในคลังประวัติออกบางส่วน");
+        alert("คำเตือน: พื้นที่ความจำในเครื่องเต็ม กรุณากดปุ่ม 'สำรองไฟล์' เพื่อเก็บประวัติไว้ แล้วลบข้อมูลในคลังออกบางส่วน");
       }
     }
 
-    function updateHistoryBadge() {
-      const count = Object.keys(savedRecords).length;
-      document.getElementById('historyCount').innerText = count;
-    }
-
-    function openHistoryModal() {
-      document.getElementById('historyModal').style.display = 'flex';
-      renderHistoryTable();
-    }
-
-    function closeHistoryModal() {
-      document.getElementById('historyModal').style.display = 'none';
-    }
+    function openHistoryModal() { document.getElementById('historyModal').style.display = 'flex'; renderHistoryTable(); }
+    function closeHistoryModal() { document.getElementById('historyModal').style.display = 'none'; }
 
     function renderHistoryTable() {
       const tbody = document.getElementById('historyTableBody');
       const search = (document.getElementById('historySearch').value || '').toLowerCase();
       tbody.innerHTML = '';
-
       const keys = Object.keys(savedRecords);
-      if (keys.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#94a3b8; padding:25px;">ยังไม่มีประวัติการบันทึก</td></tr>`;
-        return;
-      }
+      if (keys.length === 0) { tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#94a3b8; padding:25px;">ยังไม่มีประวัติการบันทึก</td></tr>`; return; }
 
       keys.forEach(key => {
         const item = savedRecords[key];
-        const match = key.toLowerCase().includes(search) || 
-                      (item.siteAddr && item.siteAddr.toLowerCase().includes(search)) ||
-                      (item.work && item.work.toLowerCase().includes(search));
+        const match = key.toLowerCase().includes(search) || (item.siteAddr && item.siteAddr.toLowerCase().includes(search)) || (item.work && item.work.toLowerCase().includes(search));
         if (!match) return;
 
         const tr = document.createElement('tr');
@@ -827,7 +748,7 @@
       if (confirm(`ยืนยันการลบประวัติของ "${key}" หรือไม่?`)) {
         delete savedRecords[key];
         localStorage.setItem('warranty_records', JSON.stringify(savedRecords));
-        updateHistoryBadge();
+        document.getElementById('historyCount').innerText = Object.keys(savedRecords).length;
         renderHistoryTable();
       }
     }
@@ -849,11 +770,9 @@
           const imported = JSON.parse(e.target.result);
           savedRecords = { ...savedRecords, ...imported };
           localStorage.setItem('warranty_records', JSON.stringify(savedRecords));
-          updateHistoryBadge();
+          document.getElementById('historyCount').innerText = Object.keys(savedRecords).length;
           alert('นำเข้าไฟล์และผสานข้อมูลประวัติสำเร็จแล้ว!');
-        } catch(err) {
-          alert('ไฟล์ไม่ถูกต้อง ไม่สามารถอ่านข้อมูลได้');
-        }
+        } catch(err) { alert('ไฟล์ไม่ถูกต้อง ไม่สามารถอ่านข้อมูลได้'); }
       };
       reader.readAsText(file);
       event.target.value = '';
@@ -861,7 +780,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('docLogoImg').src = currentLogoSrc;
-      updateHistoryBadge();
+      document.getElementById('historyCount').innerText = Object.keys(savedRecords).length;
       updateAll();
     });
   </script>
