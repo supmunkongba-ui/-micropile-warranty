@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ระบบออกหนังสือรับรองประกันงานออนไลน์</title>
+  <title>ระบบออกหนังสือรับรองประกันงานออนไลน์ - หาดใหญ่ ไมโครไพล์</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -186,6 +186,8 @@
       background: #fff;
       margin-top: 4px;
       touch-action: none;
+      width: 100%;
+      height: 110px;
     }
 
     /* Modal หน้าต่างประวัติ */
@@ -272,7 +274,7 @@
       width: 210mm;
       min-height: 297mm;
       background: #ffffff;
-      padding: 22mm 20mm;
+      padding: 20mm 20mm 22mm 20mm;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
       position: relative;
       display: flex;
@@ -282,50 +284,44 @@
       margin-bottom: 30px;
     }
 
-    .doc-header-logo {
+    /* Top Header with Logo on Top-Left */
+    .doc-top-header {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 25px;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 12px;
     }
 
-    .logo-badge {
-      display: inline-flex;
-      align-items: center;
-      background: #000;
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 4px;
-      border-left: 6px solid #e02424;
+    .doc-logo-box {
+      width: 130px;
+      text-align: left;
     }
 
-    .logo-badge .symbol {
-      font-size: 26px;
-      font-weight: 900;
-      color: #e02424;
-      margin-right: 12px;
+    .doc-logo-box img {
+      max-width: 100%;
+      max-height: 95px;
+      object-fit: contain;
     }
 
-    .logo-badge .brand-title {
-      font-size: 19px;
-      font-weight: bold;
-      display: block;
+    .doc-top-info {
+      text-align: right;
+      font-size: 11pt;
+      color: #475569;
+      line-height: 1.5;
     }
 
-    .logo-badge .brand-sub {
-      font-size: 11px;
-      color: #f87171;
-      letter-spacing: 1px;
-      font-weight: 600;
-      text-transform: uppercase;
-      display: block;
+    .doc-top-info strong {
+      color: #1e293b;
+      font-size: 12pt;
     }
 
     .doc-title {
       text-align: center;
-      font-size: 22pt;
+      font-size: 24pt;
       font-weight: 700;
-      margin: 15px 0 30px 0;
+      margin: 15px 0 25px 0;
       text-decoration: underline;
       text-underline-offset: 6px;
     }
@@ -335,14 +331,14 @@
       line-height: 1.85;
       text-align: justify;
       text-indent: 45px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .doc-photos-grid {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
       margin: 15px 0;
       width: 100%;
     }
@@ -369,16 +365,17 @@
       font-weight: 500;
     }
 
+    /* 2 Signatures Columns: Contractor & Client */
     .doc-signatures {
       margin-top: auto;
-      padding-top: 40px;
+      padding-top: 35px;
       display: flex;
       justify-content: space-between;
       page-break-inside: avoid;
     }
 
     .sig-column {
-      width: 45%;
+      width: 46%;
       text-align: center;
       font-size: 12pt;
       line-height: 1.6;
@@ -402,7 +399,7 @@
 
     .dots {
       border-bottom: 1px dotted #333;
-      width: 160px;
+      width: 150px;
       display: inline-block;
       margin: 0 4px;
     }
@@ -436,31 +433,44 @@
     
     <!-- Input Form -->
     <div class="editor-pane">
+
+      <!-- 1. หัวข้อและโลโก้บนซ้าย -->
       <div class="form-section">
-        <div class="form-section-title"><i class="fa-solid fa-heading"></i> 1. หัวข้อและเอกสาร</div>
+        <div class="form-section-title"><i class="fa-solid fa-image"></i> 1. ข้อมูลหัวเอกสารและโลโก้บนซ้าย</div>
         <div class="form-group">
           <label>หัวข้อเอกสาร</label>
           <input type="text" id="inpDocTitle" value="หนังสือรับรองประกันงาน" oninput="updateDocument()">
         </div>
+        <div class="form-group">
+          <label>เปลี่ยนโลโก้มุมบนซ้าย (เลือกไฟล์รูปภาพจากเครื่อง)</label>
+          <input type="file" id="inpLogoUpload" accept="image/*" onchange="handleLogoUpload(event)">
+        </div>
       </div>
 
+      <!-- 2. ข้อมูลฝ่ายผู้รับจ้าง -->
       <div class="form-section">
-        <div class="form-section-title"><i class="fa-solid fa-building"></i> 2. ข้อมูลบริษัท/ผู้รับประกัน</div>
+        <div class="form-section-title"><i class="fa-solid fa-building"></i> 2. ข้อมูลฝ่ายผู้รับจ้าง (บริษัท / ช่าง)</div>
         <div class="form-group">
-          <label>ชื่อบริษัท (ภาษาไทย)</label>
+          <label>ชื่อบริษัท / ผู้รับจ้าง (ภาษาไทย)</label>
           <input type="text" id="inpCompNameTH" value="บริษัท หาดใหญ่ ไมโครไพล์ จำกัด" oninput="updateAll()">
         </div>
-        <div class="form-group">
-          <label>ชื่อบริษัท (ภาษาอังกฤษ)</label>
-          <input type="text" id="inpCompNameEN" value="HATYAI MICROPILE CO.,LTD." oninput="updateAll()">
+        <div class="form-row">
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์ติดต่อ</label>
+            <input type="text" id="inpCompPhone" value="080-4549659" oninput="updateAll()">
+          </div>
+          <div class="form-group">
+            <label>ชื่อบริษัท (ภาษาอังกฤษ)</label>
+            <input type="text" id="inpCompNameEN" value="HATYAI MICROPILE CO.,LTD." oninput="updateAll()">
+          </div>
         </div>
         <div class="form-group">
-          <label>ที่อยู่สำนักงาน</label>
+          <label>ที่ตั้งสำนักงาน / ที่อยู่ผู้รับจ้าง</label>
           <input type="text" id="inpCompAddress" value="12 หมู่ที่ 2 ตำบลควนลัง อำเภอหาดใหญ่ จังหวัดสงขลา" oninput="updateAll()">
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>ผู้มีอำนาจลงนาม</label>
+            <label>ชื่อผู้ลงนามฝ่ายผู้รับจ้าง</label>
             <input type="text" id="inpSignerName" value="นายศรายุทธ เมรุศักดิ์" oninput="updateAll()">
           </div>
           <div class="form-group">
@@ -470,18 +480,26 @@
         </div>
       </div>
 
+      <!-- 3. ข้อมูลฝ่ายผู้ว่าจ้าง -->
       <div class="form-section">
-        <div class="form-section-title"><i class="fa-solid fa-user-check"></i> 3. ข้อมูลผู้ว่าจ้าง</div>
-        <div class="form-group">
-          <label>ชื่อ-นามสกุล ผู้ว่าจ้าง</label>
-          <input type="text" id="inpCustName" value="คุณ ศักรินทร์ สรายุทธพิสัย" oninput="updateAll()">
+        <div class="form-section-title"><i class="fa-solid fa-user-check"></i> 3. ข้อมูลฝ่ายผู้ว่าจ้าง (ลูกค้า)</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>ชื่อ-นามสกุล ผู้ว่าจ้าง</label>
+            <input type="text" id="inpCustName" value="คุณ ศักรินทร์ สรายุทธพิสัย" oninput="updateAll()">
+          </div>
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์ผู้ว่าจ้าง</label>
+            <input type="text" id="inpCustPhone" value="081-XXXXXXX" oninput="updateAll()">
+          </div>
         </div>
         <div class="form-group">
-          <label>สถานที่ทำงาน/ที่อยู่หน้างาน</label>
+          <label>สถานที่ทำงาน / ที่อยู่หน้างาน</label>
           <input type="text" id="inpSiteAddress" value="101 ม. 4 ซ.เฟื่องประชา อ.หาดใหญ่ จ.สงขลา 90110" oninput="updateAll()">
         </div>
       </div>
 
+      <!-- 4. สัญญาและระยะเวลารับประกัน -->
       <div class="form-section">
         <div class="form-section-title"><i class="fa-solid fa-calendar-check"></i> 4. สัญญาและระยะเวลารับประกัน</div>
         <div class="form-row">
@@ -518,6 +536,7 @@
         </div>
       </div>
 
+      <!-- 5. ข้อความสัญญาแบบละเอียด -->
       <div class="form-section">
         <div class="form-section-title"><i class="fa-solid fa-file-lines"></i> 5. ข้อความสัญญาแบบละเอียด</div>
         <div class="form-group">
@@ -528,6 +547,7 @@
         </button>
       </div>
 
+      <!-- 6. แนบรูปภาพหน้างาน -->
       <div class="form-section">
         <div class="form-section-title"><i class="fa-solid fa-images"></i> 6. แนบรูปภาพหน้างาน</div>
         <div class="form-group">
@@ -536,24 +556,39 @@
         <div id="photoListManager"></div>
       </div>
 
+      <!-- 7. ช่องเซ็นชื่อทั้งสองฝ่าย -->
       <div class="form-section">
-        <div class="form-section-title"><i class="fa-solid fa-signature"></i> 7. ลายเซ็นดิจิทัล</div>
-        <label>เซ็นชื่อผู้รับจ้าง</label>
-        <canvas id="sigCanvas" class="sig-canvas-box" width="380" height="120"></canvas>
-        <button class="btn btn-danger-sm" style="margin-top:6px;" onclick="clearSignature()"><i class="fa-solid fa-eraser"></i> ล้างลายเซ็น</button>
+        <div class="form-section-title"><i class="fa-solid fa-signature"></i> 7. ลายเซ็นดิจิทัลทั้งสองฝ่าย</div>
+        
+        <!-- ลายเซ็นผู้รับจ้าง -->
+        <div style="margin-bottom: 15px;">
+          <label style="color:#c92a2a; font-weight:700;"><i class="fa-solid fa-pen"></i> ลายเซ็นฝ่ายผู้รับจ้าง</label>
+          <canvas id="sigCanvasContractor" class="sig-canvas-box" width="380" height="110"></canvas>
+          <button class="btn-danger-sm" style="margin-top:4px;" onclick="clearContractorSig()"><i class="fa-solid fa-eraser"></i> ล้างลายเซ็นผู้รับจ้าง</button>
+        </div>
+
+        <!-- ลายเซ็นผู้ว่าจ้าง -->
+        <div>
+          <label style="color:#0284c7; font-weight:700;"><i class="fa-solid fa-pen"></i> ลายเซ็นฝ่ายผู้ว่าจ้าง</label>
+          <canvas id="sigCanvasClient" class="sig-canvas-box" width="380" height="110"></canvas>
+          <button class="btn-danger-sm" style="margin-top:4px;" onclick="clearClientSig()"><i class="fa-solid fa-eraser"></i> ล้างลายเซ็นผู้ว่าจ้าง</button>
+        </div>
       </div>
     </div>
 
     <!-- Live Preview Document (A4) -->
     <div class="preview-pane">
       <div class="a4-document" id="printArea">
-        <div class="doc-header-logo">
-          <div class="logo-badge">
-            <span class="symbol">HM</span>
-            <div class="brand-text">
-              <span class="brand-title" id="lblLogoCompTH">บริษัท หาดใหญ่ ไมโครไพล์ จำกัด</span>
-              <span class="brand-sub" id="lblLogoCompEN">HATYAI MICROPILE CO.,LTD.</span>
-            </div>
+        
+        <!-- ส่วนหัว: โลโก้อยู่มุมบนซ้าย และข้อมูลติดต่ออยู่มุมบนขวา -->
+        <div class="doc-top-header">
+          <div class="doc-logo-box">
+            <img id="docLogoImg" alt="โลโก้บริษัท">
+          </div>
+          <div class="doc-top-info">
+            <strong id="lblHeaderCompName">บริษัท หาดใหญ่ ไมโครไพล์ จำกัด</strong><br>
+            <span id="lblHeaderAddress">12 หมู่ที่ 2 ต.ควนลัง อ.หาดใหญ่ จ.สงขลา</span><br>
+            <span>โทรศัพท์: <strong id="lblHeaderPhone" style="color:#c92a2a;">080-4549659</strong></span>
           </div>
         </div>
 
@@ -567,7 +602,9 @@
           </div>
         </div>
 
+        <!-- ช่องลงชื่อทั้ง 2 ฝ่าย -->
         <div class="doc-signatures">
+          <!-- ผู้รับจ้าง (ซ้าย) -->
           <div class="sig-column">
             <div class="sig-line">
               <img id="contractorSigImg" style="display:none;" alt="ลายเซ็นผู้รับจ้าง">
@@ -575,16 +612,21 @@
             </div>
             <div>(<span id="lblSignerName">นายศรายุทธ เมรุศักดิ์</span>)</div>
             <div id="lblCompNameBottom">บริษัท หาดใหญ่ ไมโครไพล์ จำกัด</div>
+            <div style="font-size:10pt; color:#64748b;">โทร. <span id="lblBottomPhone">080-4549659</span></div>
           </div>
 
+          <!-- ผู้ว่าจ้าง (ขวา) -->
           <div class="sig-column">
             <div class="sig-line">
+              <img id="clientSigImg" style="display:none;" alt="ลายเซ็นผู้ว่าจ้าง">
               <span>ลงชื่อ<span class="dots"></span>ผู้ว่าจ้าง</span>
             </div>
             <div>(<span id="lblCustName">คุณ ศักรินทร์ สรายุทธพิสัย</span>)</div>
             <div>ผู้ว่าจ้าง</div>
+            <div style="font-size:10pt; color:#64748b;">โทร. <span id="lblBottomCustPhone">081-XXXXXXX</span></div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -610,9 +652,7 @@
               <th style="width: 20%; text-align:center;">จัดการ</th>
             </tr>
           </thead>
-          <tbody id="historyTableBody">
-            <!-- Dynamic rows -->
-          </tbody>
+          <tbody id="historyTableBody"></tbody>
         </table>
       </div>
     </div>
@@ -622,65 +662,128 @@
     let uploadedPhotos = [];
     let savedRecords = JSON.parse(localStorage.getItem('warranty_records') || '{}');
 
-    // Canvas Signature
-    const canvas = document.getElementById('sigCanvas');
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-    ctx.lineWidth = 2.5;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#0f172a';
+    // Default Logo SVG (จำลองตราสัญลักษณ์ หาดใหญ่ ไมโครไพล์ 080-4549659 คมชัด ไม่แตก)
+    const defaultLogoSVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="100%" height="100%">
+        <rect width="400" height="440" rx="20" fill="#4a4f55"/>
+        <g transform="translate(40, 20)">
+          <!-- Buildings & Piles -->
+          <polygon points="40,240 40,110 90,80 90,240" fill="#f97316"/>
+          <polygon points="95,240 95,75 160,40 160,240" fill="#ea580c"/>
+          <polygon points="165,240 165,40 230,75 230,240" fill="#ea580c"/>
+          <polygon points="235,240 235,80 280,110 280,240" fill="#f97316"/>
+          <!-- Window lines -->
+          <line x1="45" y1="120" x2="85" y2="95" stroke="#fff" stroke-width="4"/>
+          <line x1="45" y1="145" x2="85" y2="120" stroke="#fff" stroke-width="4"/>
+          <line x1="45" y1="170" x2="85" y2="145" stroke="#fff" stroke-width="4"/>
+          <line x1="105" y1="95" x2="150" y2="70" stroke="#fff" stroke-width="4"/>
+          <line x1="105" y1="125" x2="150" y2="100" stroke="#fff" stroke-width="4"/>
+          <line x1="175" y1="70" x2="220" y2="95" stroke="#fff" stroke-width="4"/>
+          <line x1="175" y1="100" x2="220" y2="125" stroke="#fff" stroke-width="4"/>
+          <line x1="240" y1="95" x2="275" y2="120" stroke="#fff" stroke-width="4"/>
+          <line x1="240" y1="120" x2="275" y2="145" stroke="#fff" stroke-width="4"/>
+          <!-- Letters HM as Piles -->
+          <path d="M 20 180 L 70 180 L 70 240 L 100 240 L 100 180 L 150 180 L 150 280 L 120 310 L 120 250 L 50 250 L 50 310 L 20 280 Z" fill="#111827" stroke="#fff" stroke-width="3"/>
+          <path d="M 170 180 L 210 230 L 250 180 L 300 180 L 300 280 L 270 310 L 270 220 L 240 260 L 180 260 L 150 220 L 150 310 L 120 280 L 120 180 Z" fill="#111827" stroke="#fff" stroke-width="3"/>
+        </g>
+        <!-- Text Box 1: ชื่อบริษัท -->
+        <rect x="25" y="325" width="350" height="42" rx="6" fill="#f97316" stroke="#fff" stroke-width="3"/>
+        <text x="200" y="354" fill="#ffffff" font-family="'Sarabun', sans-serif" font-weight="700" font-size="21" text-anchor="middle">บริษัท หาดใหญ่ ไมโครไพล์ จำกัด</text>
+        <!-- Text Box 2: เบอร์โทร -->
+        <text x="200" y="415" fill="#ffffff" stroke="#111" stroke-width="4" paint-order="stroke fill" font-family="'Sarabun', sans-serif" font-weight="900" font-size="34" letter-spacing="2" text-anchor="middle">080-4549659</text>
+      </svg>
+    `);
 
-    function getCanvasCoordinates(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return { x: clientX - rect.left, y: clientY - rect.top };
-    }
+    let currentLogoSrc = defaultLogoSVG;
 
-    function startDraw(e) {
-      isDrawing = true;
-      const { x, y } = getCanvasCoordinates(e);
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      e.preventDefault();
-    }
+    // Signature Canvas Setup (2 ฝ่าย: Contractor & Client)
+    function setupSignaturePad(canvasId, imgId) {
+      const cvs = document.getElementById(canvasId);
+      const ctx = cvs.getContext('2d');
+      const img = document.getElementById(imgId);
+      let drawing = false;
 
-    function draw(e) {
-      if (!isDrawing) return;
-      const { x, y } = getCanvasCoordinates(e);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-      e.preventDefault();
-      applySignatureToDoc();
-    }
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#0f172a';
 
-    function stopDraw() {
-      if (isDrawing) {
-        isDrawing = false;
-        applySignatureToDoc();
+      function getCoords(e) {
+        const rect = cvs.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
       }
+
+      function start(e) {
+        drawing = true;
+        const { x, y } = getCoords(e);
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        e.preventDefault();
+      }
+
+      function move(e) {
+        if (!drawing) return;
+        const { x, y } = getCoords(e);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        e.preventDefault();
+        img.src = cvs.toDataURL();
+        img.style.display = 'block';
+      }
+
+      function end() {
+        if (drawing) {
+          drawing = false;
+          img.src = cvs.toDataURL();
+          img.style.display = 'block';
+        }
+      }
+
+      cvs.addEventListener('mousedown', start);
+      cvs.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', end);
+      cvs.addEventListener('touchstart', start, { passive: false });
+      cvs.addEventListener('touchmove', move, { passive: false });
+      window.addEventListener('touchend', end);
+
+      return {
+        clear: () => {
+          ctx.clearRect(0, 0, cvs.width, cvs.height);
+          img.style.display = 'none';
+          img.src = '';
+        },
+        setImage: (dataUrl) => {
+          if (dataUrl && dataUrl.startsWith('data:image')) {
+            img.src = dataUrl;
+            img.style.display = 'block';
+          } else {
+            img.style.display = 'none';
+            img.src = '';
+          }
+        }
+      };
     }
 
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', draw);
-    window.addEventListener('mouseup', stopDraw);
-    canvas.addEventListener('touchstart', startDraw, { passive: false });
-    canvas.addEventListener('touchmove', draw, { passive: false });
-    window.addEventListener('touchend', stopDraw);
+    const contractorPad = setupSignaturePad('sigCanvasContractor', 'contractorSigImg');
+    const clientPad = setupSignaturePad('sigCanvasClient', 'clientSigImg');
 
-    function clearSignature() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const sigImg = document.getElementById('contractorSigImg');
-      sigImg.style.display = 'none';
-      sigImg.src = '';
+    function clearContractorSig() { contractorPad.clear(); }
+    function clearClientSig() { clientPad.clear(); }
+
+    // Logo Upload Handling
+    function handleLogoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        currentLogoSrc = event.target.result;
+        document.getElementById('docLogoImg').src = currentLogoSrc;
+      };
+      reader.readAsDataURL(file);
     }
 
-    function applySignatureToDoc() {
-      const sigImg = document.getElementById('contractorSigImg');
-      sigImg.src = canvas.toDataURL();
-      sigImg.style.display = 'block';
-    }
-
+    // Auto-generate paragraph text
     function generateContractText() {
       const comp = document.getElementById('inpCompNameTH').value.trim();
       const date = document.getElementById('inpContractDate').value.trim();
@@ -705,15 +808,26 @@
     }
 
     function updateAll() {
-      document.getElementById('lblLogoCompTH').innerText = document.getElementById('inpCompNameTH').value;
-      document.getElementById('lblLogoCompEN').innerText = document.getElementById('inpCompNameEN').value;
-      document.getElementById('lblCompNameBottom').innerText = document.getElementById('inpCompNameTH').value;
+      const compName = document.getElementById('inpCompNameTH').value;
+      const phone = document.getElementById('inpCompPhone').value;
+      const custName = document.getElementById('inpCustName').value;
+      const custPhone = document.getElementById('inpCustPhone').value;
+      const addr = document.getElementById('inpCompAddress').value;
+
+      document.getElementById('lblHeaderCompName').innerText = compName;
+      document.getElementById('lblHeaderPhone').innerText = phone;
+      document.getElementById('lblHeaderAddress').innerText = addr;
+      document.getElementById('lblCompNameBottom').innerText = compName;
+      document.getElementById('lblBottomPhone').innerText = phone;
+
       document.getElementById('lblSignerName').innerText = document.getElementById('inpSignerName').value;
-      document.getElementById('lblCustName').innerText = document.getElementById('inpCustName').value;
+      document.getElementById('lblCustName').innerText = custName;
+      document.getElementById('lblBottomCustPhone').innerText = custPhone;
+
       generateContractText();
     }
 
-    // Photo Handling
+    // Photo Upload Handling
     function handlePhotoUpload(e) {
       const files = Array.from(e.target.files);
       if (!files.length) return;
@@ -789,12 +903,15 @@
         id: 'REC_' + Date.now(),
         savedAt: new Date().toLocaleString('th-TH'),
         title: document.getElementById('inpDocTitle').value,
+        logoSrc: currentLogoSrc,
         compTH: document.getElementById('inpCompNameTH').value,
         compEN: document.getElementById('inpCompNameEN').value,
+        compPhone: document.getElementById('inpCompPhone').value,
         compAddr: document.getElementById('inpCompAddress').value,
         signer: document.getElementById('inpSignerName').value,
         signerPos: document.getElementById('inpSignerPos').value,
         cust: document.getElementById('inpCustName').value,
+        custPhone: document.getElementById('inpCustPhone').value,
         siteAddr: document.getElementById('inpSiteAddress').value,
         contractDate: document.getElementById('inpContractDate').value,
         period: document.getElementById('inpWarrantyPeriod').value,
@@ -805,18 +922,24 @@
         ref: document.getElementById('inpRefNote').value,
         contractBody: document.getElementById('inpContractBody').value,
         photos: uploadedPhotos,
-        signature: document.getElementById('contractorSigImg').src || ''
+        contractorSig: document.getElementById('contractorSigImg').src || '',
+        clientSig: document.getElementById('clientSigImg').src || ''
       };
     }
 
     function applyFormData(data) {
       document.getElementById('inpDocTitle').value = data.title || '';
+      currentLogoSrc = data.logoSrc || defaultLogoSVG;
+      document.getElementById('docLogoImg').src = currentLogoSrc;
+
       document.getElementById('inpCompNameTH').value = data.compTH || '';
       document.getElementById('inpCompNameEN').value = data.compEN || '';
+      document.getElementById('inpCompPhone').value = data.compPhone || '080-4549659';
       document.getElementById('inpCompAddress').value = data.compAddr || '';
       document.getElementById('inpSignerName').value = data.signer || '';
       document.getElementById('inpSignerPos').value = data.signerPos || '';
       document.getElementById('inpCustName').value = data.cust || '';
+      document.getElementById('inpCustPhone').value = data.custPhone || '';
       document.getElementById('inpSiteAddress').value = data.siteAddr || '';
       document.getElementById('inpContractDate').value = data.contractDate || '';
       document.getElementById('inpWarrantyPeriod').value = data.period || '';
@@ -834,13 +957,9 @@
       }
       renderPhotos(true);
 
-      const sigImg = document.getElementById('contractorSigImg');
-      if (data.signature && data.signature.startsWith('data:image')) {
-        sigImg.src = data.signature;
-        sigImg.style.display = 'block';
-      } else {
-        clearSignature();
-      }
+      // Restore both signatures
+      contractorPad.setImage(data.contractorSig);
+      clientPad.setImage(data.clientSig);
 
       updateAll();
       if (data.contractBody) {
@@ -893,7 +1012,7 @@
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong>${item.contractDate || '-'}</strong><br><small style="color:#64748b;">บันทึกเมื่อ: ${item.savedAt || '-'}</small></td>
-          <td><span style="font-weight:600; color:#1e293b;">${item.cust || '-'}</span></td>
+          <td><span style="font-weight:600; color:#1e293b;">${item.cust || '-'}</span><br><small style="color:#64748b;">โทร. ${item.custPhone || '-'}</small></td>
           <td><small>${item.siteAddr || '-'}</small><br><span style="color:#c92a2a; font-size:0.8rem;">${item.work || ''}</span></td>
           <td style="text-align:center;">
             <div class="action-badge">
@@ -964,6 +1083,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('docLogoImg').src = currentLogoSrc;
       updateHistoryBadge();
       updateAll();
     });
