@@ -7,11 +7,8 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
     :root {
@@ -27,108 +24,134 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Sarabun', sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-    header { background-color: var(--secondary); color: #fff; padding: 12px 18px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.15); }
+    /* Header */
+    header { background-color: var(--secondary); color: #fff; padding: 12px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .brand-title { display: flex; align-items: center; gap: 12px; }
-    .brand-icon { background: #e02424; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: #fff; }
-    .brand-text h1 { font-size: 1.05rem; font-weight: 700; line-height: 1.25; }
-    .brand-text p { font-size: 0.75rem; color: #94a3b8; }
-    .badge-online { background: rgba(224, 36, 36, 0.15); border: 1px solid rgba(224, 36, 36, 0.4); color: #fca5a5; font-size: 0.72rem; padding: 4px 10px; border-radius: 6px; text-align: center; font-weight: 600; line-height: 1.2; }
+    .brand-title { display: flex; align-items: center; gap: 10px; }
+    .brand-icon { background: #e02424; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: #fff; }
+    .brand-text h1 { font-size: 0.95rem; font-weight: 700; line-height: 1.2; }
+    .brand-text p { font-size: 0.7rem; color: #94a3b8; }
+    .badge-online { background: rgba(224, 36, 36, 0.2); border: 1px solid rgba(224, 36, 36, 0.4); color: #fca5a5; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; text-align: center; font-weight: 600; line-height: 1.2; }
 
-    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .btn { padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid transparent; transition: all 0.2s; text-decoration: none; }
+    /* Buttons */
+    .btn-group { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .btn { padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid transparent; transition: all 0.2s; text-decoration: none; }
     .btn-primary { background-color: var(--primary); color: white; }
     .btn-primary:hover { background-color: var(--primary-dark); }
     .btn-success { background-color: #16a34a; color: white; }
     .btn-history { background-color: #0284c7; color: white; }
     .btn-outline { background-color: #1e293b; color: #fff; border-color: #475569; }
-    .btn-danger-sm { background: #fee2e2; color: #ef4444; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
+    .btn-danger-sm { background: #fee2e2; color: #ef4444; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
 
-    .mobile-tabs { display: flex; background: #ffffff; border-bottom: 2px solid #e2e8f0; position: sticky; top: 115px; z-index: 90; }
-    .tab-btn { flex: 1; padding: 13px 10px; text-align: center; font-size: 0.95rem; font-weight: 700; color: #64748b; background: none; border: none; cursor: pointer; border-bottom: 3px solid transparent; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    /* Mobile Tabs */
+    .mobile-tabs { display: flex; background: #ffffff; border-bottom: 2px solid #e2e8f0; position: sticky; top: 110px; z-index: 90; }
+    .tab-btn { flex: 1; padding: 12px 8px; text-align: center; font-size: 0.9rem; font-weight: 700; color: #64748b; background: none; border: none; cursor: pointer; border-bottom: 3px solid transparent; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: #fff; }
 
+    /* Layout */
     .app-container { display: flex; flex: 1; position: relative; }
-    .editor-pane { width: 100%; max-width: 540px; background: var(--card-bg); padding: 20px; overflow-y: auto; }
-    .preview-pane { flex: 1; background-color: #525659; padding: 25px 20px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
+    .editor-pane { width: 100%; max-width: 500px; background: var(--card-bg); padding: 16px; overflow-y: auto; border-right: 1px solid var(--border-color); }
+    .preview-pane { flex: 1; background-color: #525659; padding: 20px 16px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
 
     @media (max-width: 900px) {
       .app-container { flex-direction: column; }
-      .editor-pane, .preview-pane { max-width: 100%; width: 100%; }
+      .editor-pane, .preview-pane { max-width: 100%; width: 100%; border-right: none; }
       .tab-hidden { display: none !important; }
     }
     @media (min-width: 901px) {
       .mobile-tabs { display: none; }
       .tab-hidden { display: flex !important; }
-      .editor-pane { border-right: 1px solid var(--border-color); height: calc(100vh - 120px); }
-      .preview-pane { height: calc(100vh - 120px); }
+      .editor-pane, .preview-pane { height: calc(100vh - 110px); }
     }
 
-    .form-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-    .form-section-title { font-size: 0.98rem; font-weight: 700; color: var(--secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
-    .form-group { margin-bottom: 14px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    label { display: block; font-size: 0.85rem; font-weight: 600; color: #475569; margin-bottom: 5px; }
-    input[type="text"], textarea, select { width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; color: #1e293b; outline: none; }
+    /* Forms */
+    .form-section { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 14px; }
+    .form-section-title { font-size: 0.95rem; font-weight: 700; color: var(--secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; }
+    .form-group { margin-bottom: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    label { display: block; font-size: 0.8rem; font-weight: 600; color: #475569; margin-bottom: 4px; }
+    input[type="text"], textarea, select { width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; color: #1e293b; outline: none; }
     input:focus, textarea:focus { border-color: var(--primary); }
-    textarea { resize: vertical; min-height: 85px; line-height: 1.55; }
+    textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
 
-    .photo-upload-item { display: flex; gap: 10px; align-items: center; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 8px; }
-    .photo-thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
-    .sig-canvas-box { border: 1px dashed #cbd5e1; border-radius: 6px; background: #fff; margin-top: 4px; touch-action: none; width: 100%; height: 110px; }
-
-    /* A4 Document Simulation */
-    .a4-wrapper { width: 100%; max-width: 820px; display: flex; justify-content: center; }
-    .a4-document { width: 210mm; min-height: 297mm; background: #ffffff; padding: 22mm 20mm 24mm 20mm; box-shadow: 0 10px 25px rgba(0,0,0,0.25); display: flex; flex-direction: column; color: #000; box-sizing: border-box; margin-bottom: 30px; overflow: hidden; }
-    @media (max-width: 850px) { .a4-document { width: 100%; min-height: auto; padding: 18px 16px; } }
-
-    .doc-top-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; width: 100%; }
-    .doc-logo-box { width: 130px; text-align: left; flex-shrink: 0; }
-    .doc-logo-box img { max-width: 100%; max-height: 95px; object-fit: contain; }
-    .doc-top-info { text-align: right; font-size: 11pt; color: #475569; line-height: 1.5; flex: 1; }
-    .doc-top-info strong { color: #1e293b; font-size: 12pt; }
-    .doc-title { text-align: center; font-size: 24pt; font-weight: 700; margin: 15px 0 25px 0; text-decoration: underline; text-underline-offset: 6px; }
+    /* Photo Upload List */
+    .photo-upload-item { display: flex; gap: 8px; align-items: center; background: #fff; padding: 6px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 6px; }
+    .photo-thumb { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; }
     
-    /* เพิ่มคุณสมบัติ word-break เพื่อช่วยแก้ปัญหาตัวอักษรซ้อนกันใน html2canvas */
-    .doc-body { 
-      font-size: 14pt; 
-      line-height: 1.85; 
-      text-align: left; 
-      text-indent: 45px; 
-      margin-bottom: 20px; 
-      word-break: break-word; 
-      overflow-wrap: break-word; 
+    /* Signatures Canvas */
+    .sig-canvas-box { border: 1px dashed #cbd5e1; border-radius: 6px; background: #fff; margin-top: 4px; touch-action: none; width: 100%; height: 100px; }
+
+    /* --- รูปแบบกระดาษ A4 สำหรับ Preview และ Print --- */
+    .a4-wrapper { width: 100%; display: flex; justify-content: center; }
+    
+    .a4-document { 
+      width: 210mm; 
+      min-height: 297mm; 
+      background: #ffffff; 
+      padding: 20mm 20mm; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+      display: flex; 
+      flex-direction: column; 
+      color: #000; 
+      box-sizing: border-box; 
+      margin-bottom: 20px;
     }
     
-    .doc-photos-grid { display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 15px 0; width: 100%; }
-    
-    .doc-photo-card { width: 100%; max-width: 520px; text-align: center; page-break-inside: avoid; break-inside: avoid; }
-    .doc-photo-card img { width: 100%; max-height: 380px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px; }
-    .doc-photo-caption { font-size: 12pt; color: #333; margin-top: 6px; font-weight: 500; }
-    
-    /* Mock Photo Area */
-    .mock-photo-area { background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 8px; width: 100%; max-width: 520px; padding: 40px 20px; text-align: center; color: #94a3b8; }
+    @media (max-width: 850px) { 
+      .a4-document { width: 100%; min-height: auto; padding: 16px; } 
+    }
 
-    .doc-signatures { margin-top: auto; padding-top: 35px; display: flex; justify-content: space-between; page-break-inside: avoid; break-inside: avoid; }
-    .sig-column { width: 46%; text-align: center; font-size: 12pt; line-height: 1.6; }
-    .sig-line { display: flex; align-items: flex-end; justify-content: center; min-height: 75px; margin-bottom: 8px; position: relative; }
-    .sig-line img { max-height: 70px; max-width: 165px; position: absolute; bottom: 5px; }
-    .dots { border-bottom: 1px dotted #333; width: 150px; display: inline-block; margin: 0 4px; }
+    /* Document Styles */
+    .doc-top-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
+    .doc-logo-box { width: 110px; text-align: left; }
+    .doc-logo-box img { max-width: 100%; max-height: 85px; object-fit: contain; }
+    .doc-top-info { text-align: right; font-size: 11pt; color: #475569; line-height: 1.4; }
+    .doc-top-info strong { color: #1e293b; font-size: 11pt; }
+    
+    .doc-title { text-align: center; font-size: 20pt; font-weight: 700; margin: 10px 0 20px 0; text-decoration: underline; text-underline-offset: 6px; }
+    
+    .doc-body { font-size: 13pt; line-height: 1.7; text-align: justify; text-indent: 40px; margin-bottom: 20px; word-break: break-word; }
+    
+    .doc-photos-grid { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 15px 0; width: 100%; }
+    .doc-photo-card { width: 100%; max-width: 480px; text-align: center; page-break-inside: avoid; break-inside: avoid; }
+    .doc-photo-card img { width: 100%; max-height: 350px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px; }
+    .doc-photo-caption { font-size: 11pt; color: #333; margin-top: 5px; font-weight: 500; }
+    
+    .mock-photo-area { background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 8px; width: 100%; max-width: 480px; padding: 30px 15px; text-align: center; color: #94a3b8; }
 
+    .doc-signatures { margin-top: auto; padding-top: 25px; display: flex; justify-content: space-between; page-break-inside: avoid; break-inside: avoid; }
+    .sig-column { width: 46%; text-align: center; font-size: 11pt; line-height: 1.5; }
+    .sig-line { display: flex; align-items: flex-end; justify-content: center; min-height: 70px; margin-bottom: 8px; position: relative; }
+    .sig-line img { max-height: 65px; max-width: 150px; position: absolute; bottom: 5px; }
+    .dots { border-bottom: 1px dotted #333; width: 140px; display: inline-block; margin: 0 4px; }
+
+    /* Modal History */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 999; display: none; justify-content: center; align-items: center; padding: 16px; }
-    .modal-content { background: #fff; border-radius: 10px; width: 100%; max-width: 820px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25); }
-    .modal-header { padding: 16px 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-    .modal-body { padding: 18px 20px; overflow-y: auto; flex: 1; }
+    .modal-content { background: #fff; border-radius: 10px; width: 100%; max-width: 800px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25); }
+    .modal-header { padding: 16px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 16px; overflow-y: auto; flex: 1; }
     .table-container { overflow-x: auto; width: 100%; }
-    .history-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 500px; }
-    .history-table th, .history-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: left; }
+    .history-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 450px; }
+    .history-table th, .history-table td { padding: 10px; border-bottom: 1px solid #f1f5f9; text-align: left; vertical-align: top; }
     .history-table th { background: #f8fafc; font-weight: 700; color: #475569; }
+    .history-table tr:hover { background: #f8fafc; }
 
+    /* === ตั้งค่าตอนสั่ง Print === */
     @media print {
       body { background: transparent !important; margin: 0; padding: 0; }
-      header, .mobile-tabs, .editor-pane, .modal-overlay { display: none !important; }
-      .preview-pane { padding: 0 !important; background: transparent !important; display: block !important; }
-      .a4-document { box-shadow: none !important; margin: 0 !important; width: 100% !important; padding: 15mm 15mm !important; }
+      header, .mobile-tabs, .editor-pane, .modal-overlay, .btn-group { display: none !important; }
+      .app-container { display: block; }
+      .preview-pane { padding: 0 !important; background: transparent !important; display: block !important; overflow: visible !important; height: auto !important; }
+      .a4-wrapper { display: block; }
+      .a4-document { 
+        width: 100% !important; 
+        max-width: 100% !important; 
+        box-shadow: none !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+      }
+      /* บังคับซ่อนส่วนไม่จำเป็นตอนพิมพ์ */
+      ::-webkit-scrollbar { display: none; }
     }
   </style>
 </head>
@@ -139,8 +162,8 @@
       <div class="brand-title">
         <div class="brand-icon"><i class="fa-solid fa-shield-halved"></i></div>
         <div class="brand-text">
-          <h1>ระบบออกหนังสือรับรองประกันงาน</h1>
-          <p>สร้างแบบฟอร์มรับประกันงานฐานราก เสาเข็ม พร้อมพิมพ์ PDF A4</p>
+          <h1>ออกหนังสือรับรองประกันงาน</h1>
+          <p>สร้างแบบฟอร์มรับประกันงานฐานราก เสาเข็ม</p>
         </div>
       </div>
       <div class="badge-online">Online<br>Generator</div>
@@ -151,7 +174,7 @@
         <i class="fa-solid fa-clock-rotate-left"></i> คลังประวัติ (<span id="historyCount">0</span>)
       </button>
       <button class="btn btn-success" onclick="saveRecord()">
-        <i class="fa-solid fa-floppy-disk"></i> บันทึกฉบับนี้
+        <i class="fa-solid fa-floppy-disk"></i> บันทึก
       </button>
       <button class="btn btn-outline" onclick="exportData()">
         <i class="fa-solid fa-download"></i> สำรองไฟล์
@@ -159,9 +182,10 @@
       <label for="fileImporter" class="btn btn-outline" style="cursor: pointer; margin:0;">
         <i class="fa-solid fa-upload"></i> โหลดไฟล์
       </label>
-      <input type="file" id="fileImporter" accept=".json" style="position:fixed; top:-100em;" onchange="importData(event)">
-      <button class="btn btn-primary" onclick="handlePrintOrPdf()">
-        <i class="fa-solid fa-file-pdf"></i> พิมพ์ / ดาวน์โหลด PDF
+      <input type="file" id="fileImporter" accept=".json" style="display:none;" onchange="importData(event)">
+      <!-- เปลี่ยนปุ่มเป็นเรียกคำสั่ง Print โดยตรง -->
+      <button class="btn btn-primary" onclick="printDocument()">
+        <i class="fa-solid fa-print"></i> พิมพ์ / Save PDF
       </button>
     </div>
   </header>
@@ -171,11 +195,13 @@
       <i class="fa-solid fa-pen-to-square"></i> กรอกข้อมูล
     </button>
     <button class="tab-btn" id="tabBtnPreview" onclick="switchTab('preview')">
-      <i class="fa-solid fa-eye"></i> ดูตัวอย่างเอกสาร (Preview)
+      <i class="fa-solid fa-eye"></i> ดูตัวอย่างเอกสาร
     </button>
   </div>
 
   <div class="app-container">
+    
+    <!-- ฝั่งกรอกข้อมูล -->
     <div class="editor-pane" id="formPane">
       
       <div class="form-section">
@@ -185,9 +211,8 @@
           <input type="text" id="inpDocTitle" value="หนังสือรับรองประกันงาน" oninput="updateDocument()">
         </div>
         <div class="form-group">
-          <label>โลโก้หัวเอกสาร (เปลี่ยนรูปภาพจากเครื่อง)</label>
+          <label>เปลี่ยนโลโก้ (เลือกรูปภาพจากเครื่อง)</label>
           <input type="file" id="inpLogoUpload" accept="image/*" onchange="handleLogoUpload(event)">
-          <small style="color:#64748b; display:block; margin-top:4px;">หากไม่อัปโหลด ระบบจะแสดงโลโก้หาดใหญ่ ไมโครไพล์ เริ่มต้นให้อัตโนมัติ</small>
         </div>
       </div>
 
@@ -208,7 +233,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label>ที่ตั้งสำนักงานใหญ่ / สถานที่ทำสัญญา *</label>
+          <label>ที่อยู่สำนักงาน / สถานที่ทำสัญญา *</label>
           <input type="text" id="inpCompAddress" value="12 หมู่ที่ 2 ตำบลควนลัง อำเภอหาดใหญ่ จังหวัดสงขลา" oninput="updateAll()">
         </div>
         <div class="form-row">
@@ -282,8 +307,8 @@
         <div class="form-group">
           <textarea id="inpContractBody" rows="5" oninput="document.getElementById('docBodyContent').innerHTML = this.value"></textarea>
         </div>
-        <button class="btn btn-outline" style="color:var(--text-main); border-color:#cbd5e1; width:100%;" onclick="generateContractText()">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> สร้างข้อความอัตโนมัติจากช่องข้างต้น
+        <button class="btn btn-outline" style="width:100%;" onclick="generateContractText()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> สร้างข้อความอัตโนมัติจากฟอร์มด้านบน
         </button>
       </div>
 
@@ -297,21 +322,21 @@
 
       <div class="form-section">
         <div class="form-section-title"><i class="fa-solid fa-signature"></i> 7. ลายเซ็นดิจิทัล</div>
-        <div style="margin-bottom: 16px;">
+        <div style="margin-bottom: 12px;">
           <label style="color:#c92a2a; font-weight:700;"><i class="fa-solid fa-pen"></i> ลายเซ็นฝ่ายผู้รับจ้าง</label>
-          <canvas id="sigCanvasContractor" class="sig-canvas-box" width="380" height="110"></canvas>
-          <button class="btn-danger-sm" style="margin-top:4px;" onclick="clearContractorSig()"><i class="fa-solid fa-eraser"></i> ล้างลายเซ็นผู้รับจ้าง</button>
+          <canvas id="sigCanvasContractor" class="sig-canvas-box" width="380" height="100"></canvas>
+          <button class="btn-danger-sm" style="margin-top:4px;" onclick="clearContractorSig()">ล้างลายเซ็นผู้รับจ้าง</button>
         </div>
         <div>
           <label style="color:#0284c7; font-weight:700;"><i class="fa-solid fa-pen"></i> ลายเซ็นฝ่ายผู้ว่าจ้าง</label>
-          <canvas id="sigCanvasClient" class="sig-canvas-box" width="380" height="110"></canvas>
-          <button class="btn-danger-sm" style="margin-top:4px;" onclick="clearClientSig()"><i class="fa-solid fa-eraser"></i> ล้างลายเซ็นผู้ว่าจ้าง</button>
+          <canvas id="sigCanvasClient" class="sig-canvas-box" width="380" height="100"></canvas>
+          <button class="btn-danger-sm" style="margin-top:4px;" onclick="clearClientSig()">ล้างลายเซ็นผู้ว่าจ้าง</button>
         </div>
       </div>
 
     </div>
 
-    <!-- ฝั่งที่ 2: หน้าแสดงตัวอย่างเอกสาร A4 (Preview Pane) -->
+    <!-- ฝั่งดูตัวอย่างเอกสาร A4 -->
     <div class="preview-pane tab-hidden" id="previewPane">
       <div class="a4-wrapper">
         <div class="a4-document" id="printArea">
@@ -332,9 +357,8 @@
 
           <div class="doc-photos-grid" id="docPhotosContainer">
             <div class="mock-photo-area" id="mockPhotoCard">
-              <i class="fa-solid fa-images" style="font-size: 2.5rem; margin-bottom: 10px; color: #cbd5e1;"></i><br>
-              [ พื้นที่แสดงรูปภาพหน้างาน ]<br>
-              <span style="font-size: 0.9rem; font-weight: 400;">อัปโหลดรูปภาพในหมวดที่ 6 รูปจะปรากฏที่นี่</span>
+              <i class="fa-solid fa-images" style="font-size: 2rem; margin-bottom: 8px; color: #cbd5e1;"></i><br>
+              พื้นที่แสดงรูปภาพหน้างาน
             </div>
           </div>
 
@@ -365,25 +389,25 @@
     </div>
   </div>
 
-  <!-- Modal หน้าต่างประวัติย้อนหลัง -->
+  <!-- Modal คลังประวัติ -->
   <div class="modal-overlay" id="historyModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 style="font-size:1.1rem; color:#0f172a;"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติการออกหนังสือรับประกัน</h2>
+        <h2 style="font-size:1.1rem;"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติการออกหนังสือรับประกัน</h2>
         <button style="background:none; border:none; font-size:1.4rem; cursor:pointer;" onclick="closeHistoryModal()">&times;</button>
       </div>
       <div class="modal-body">
-        <div style="margin-bottom:14px;">
-          <input type="text" id="historySearch" placeholder="🔍 ค้นหาชื่อลูกค้า, วันที่, หรือสถานที่..." oninput="renderHistoryTable()">
+        <div style="margin-bottom:12px;">
+          <input type="text" id="historySearch" placeholder="🔍 ค้นหาชื่อลูกค้า, วันที่, หรือสถานที่..." oninput="renderHistoryTable()" style="width:100%; padding:8px; border-radius:4px; border:1px solid #ccc;">
         </div>
         <div class="table-container">
           <table class="history-table">
             <thead>
               <tr>
-                <th>วันที่สัญญา</th>
-                <th>ผู้ว่าจ้าง</th>
-                <th>สถานที่ / รายละเอียด</th>
-                <th style="text-align:center;">จัดการ</th>
+                <th style="width:20%;">วันที่ / เวลาบันทึก</th>
+                <th style="width:30%;">ชื่อลูกค้า (ผู้ว่าจ้าง)</th>
+                <th style="width:35%;">สถานที่</th>
+                <th style="width:15%; text-align:center;">จัดการ</th>
               </tr>
             </thead>
             <tbody id="historyTableBody"></tbody>
@@ -397,6 +421,7 @@
     let uploadedPhotos = [];
     let savedRecords = JSON.parse(localStorage.getItem('warranty_records') || '{}');
 
+    // Default Logo SVG คงขนาดไว้ชัดเจน
     const defaultLogoSVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="400" height="440">
         <rect width="400" height="440" rx="20" fill="#4a4f55"/>
@@ -425,6 +450,7 @@
 
     let currentLogoSrc = defaultLogoSVG;
 
+    // บีบอัดรูปภาพ
     function compressImage(file, maxWidth, quality, callback) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -448,6 +474,7 @@
       }
     }
 
+    // สลับแท็บบนหน้าจอมือถือ
     function switchTab(tab) {
       const formPane = document.getElementById('formPane');
       const previewPane = document.getElementById('previewPane');
@@ -462,6 +489,7 @@
       }
     }
 
+    // กระดานลายเซ็น
     function setupSignaturePad(canvasId, imgId) {
       const cvs = document.getElementById(canvasId);
       const ctx = cvs.getContext('2d');
@@ -502,7 +530,7 @@
       });
     }
 
-    // --- อัปเดตจุดที่แก้ไขปัญหาตัวหนังสือซ้อนกัน (เพิ่ม Space วรรคคำรอบตัวแปร) ---
+    // สร้างประโยคสัญญา (เว้นวรรคให้ฟอนต์ไทยไม่ซ้อนทับกันง่าย)
     function generateContractText() {
       const comp = document.getElementById('inpCompNameTH').value.trim();
       const date = document.getElementById('inpContractDate').value.trim();
@@ -516,12 +544,10 @@
       const site = document.getElementById('inpSiteAddress').value.trim();
       const ref = document.getElementById('inpRefNote').value.trim();
 
-      // สังเกตว่ามีการเคาะวรรครอบๆ ${ตัวแปร} เพื่อช่วย html2canvas คำนวณความกว้างข้อความภาษาไทย
       const text = `สัญญาที่ทำขึ้น ณ ${comp} เมื่อวันที่ ${date} สำนักงานเลขที่ ${addr} ทำขึ้นเพื่อใช้ในการรับประกัน ${purpose} นาน ${period} เริ่มตั้งแต่วันที่ ${dStart} – ${dEnd} ซึ่งทาง ${comp} ได้รับ ${work} ของ ${cust} ที่อยู่ ${site} ${ref}`;
       document.getElementById('inpContractBody').value = text;
       document.getElementById('docBodyContent').innerText = text;
     }
-    // -------------------------------------------------------------------------
 
     function updateDocument() { document.getElementById('docTitle').innerText = document.getElementById('inpDocTitle').value; }
 
@@ -550,7 +576,7 @@
       if (mockCard) mockCard.style.display = 'none';
 
       files.forEach(file => {
-        compressImage(file, 800, 0.75, function(compressedData) {
+        compressImage(file, 800, 0.7, function(compressedData) {
           uploadedPhotos.push({ id: Date.now() + Math.random(), src: compressedData, caption: file.name });
           renderPhotos();
         });
@@ -596,79 +622,32 @@
       }
     }
 
-    function handlePrintOrPdf() {
+    // ----------------- แก้ไขการสั่งพิมพ์ให้ฟอนต์ไทยไม่เพี้ยน 100% -----------------
+    // ใช้คำสั่ง window.print() เปิดเมนูพิมพ์ของมือถือ (ซึ่งมีตัวเลือก Save as PDF ในตัวเครื่องอยู่แล้ว)
+    // วิธีนี้ทำให้เบราว์เซอร์เป็นคนวาดฟอนต์เอง จึงคมชัดและสระไม่ลอยแน่นอน
+    function printDocument() {
+      // สลับไปหน้า Preview ก่อนสั่งพิมพ์
       const previewPane = document.getElementById('previewPane');
-      const wasHidden = previewPane.classList.contains('tab-hidden');
-      if (wasHidden) previewPane.classList.remove('tab-hidden');
-
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      previewPane.scrollTop = 0;
-      
-      const originalOverflow = previewPane.style.overflow;
-      const originalHeight = previewPane.style.height;
-      previewPane.style.overflow = 'visible';
-      previewPane.style.height = 'auto';
-
-      const element = document.getElementById('printArea');
-      const cust = document.getElementById('inpCustName').value || 'ลูกค้า';
-
-      const originalWidth = element.style.width;
-      const originalMaxWidth = element.style.maxWidth;
-      element.style.width = '794px';
-      element.style.maxWidth = '794px';
-
-      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-      if (isMobile) {
-        const opt = {
-          margin:       0,
-          filename:     `ใบรับประกัน_${cust}.pdf`,
-          image:        { type: 'jpeg', quality: 0.98 },
-          pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] },
-          html2canvas:  { 
-            scale: 2, 
-            scrollY: 0, 
-            scrollX: 0, 
-            useCORS: true,
-            allowTaint: true,
-            width: 794, 
-            windowWidth: 850 
-          },
-          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-
-        alert('กำลังประมวลผลไฟล์ PDF หน้า A4 กรุณารอสักครู่...');
-        
-        setTimeout(() => {
-          html2pdf().set(opt).from(element).save().then(() => {
-            element.style.width = originalWidth;
-            element.style.maxWidth = originalMaxWidth;
-            previewPane.style.overflow = originalOverflow;
-            previewPane.style.height = originalHeight;
-            if (wasHidden) previewPane.classList.add('tab-hidden');
-          }).catch(err => {
-            alert('เกิดข้อผิดพลาดในการโหลดรูปภาพ แนะนำให้เปิดผ่านเบราว์เซอร์ Chrome โดยตรงครับ');
-            element.style.width = originalWidth;
-            element.style.maxWidth = originalMaxWidth;
-            previewPane.style.overflow = originalOverflow;
-            previewPane.style.height = originalHeight;
-            if (wasHidden) previewPane.classList.add('tab-hidden');
-          });
-        }, 500);
-      } else {
-        window.print();
-        element.style.width = originalWidth;
-        element.style.maxWidth = originalMaxWidth;
-        previewPane.style.overflow = originalOverflow;
-        previewPane.style.height = originalHeight;
-        if (wasHidden) previewPane.classList.add('tab-hidden');
+      if (previewPane.classList.contains('tab-hidden')) {
+        switchTab('preview');
       }
+      
+      // ปรับแต่ง Title ของเว็บชั่วคราว เพื่อให้ชื่อไฟล์ PDF อัตโนมัติเป็นชื่อลูกค้า
+      const cust = document.getElementById('inpCustName').value || 'ลูกค้า';
+      const originalTitle = document.title;
+      document.title = `ใบรับประกัน_${cust}`;
+      
+      // หน่วงเวลาเล็กน้อยให้ CSS หน้ากระดาษจัดทรงให้เรียบร้อยแล้วค่อยเรียกเมนูพิมพ์
+      setTimeout(() => {
+        window.print();
+        // คืนค่าชื่อ Title กลับหลังสั่งพิมพ์เสร็จ
+        document.title = originalTitle;
+      }, 500);
     }
 
+    // ----------------- แก้ไขบั๊กประวัติบันทึกซ้ำ (เพิ่มรหัสสุ่มท้ายชื่อ) -----------------
     function getCurrentFormData() {
       return {
-        id: 'REC_' + Date.now(),
         savedAt: new Date().toLocaleString('th-TH'),
         title: document.getElementById('inpDocTitle').value,
         logoSrc: currentLogoSrc,
@@ -731,14 +710,17 @@
 
     function saveRecord() {
       const data = getCurrentFormData();
-      const recordKey = `${data.cust || 'ไม่มีชื่อ'} (${data.contractDate || 'ไม่ระบุวันที่'})`;
+      // แก้บั๊ก: เพิ่มเลขสุ่ม (Date.now()) ต่อท้ายเพื่อไม่ให้ Key ซ้ำกันแม้ชื่อลูกค้าเหมือนเดิม
+      const uniqueId = Date.now().toString().slice(-4);
+      const recordKey = `${data.cust || 'ไม่มีชื่อ'} (${data.contractDate || '-'}) - #${uniqueId}`;
+      
       try {
         savedRecords[recordKey] = data;
         localStorage.setItem('warranty_records', JSON.stringify(savedRecords));
         document.getElementById('historyCount').innerText = Object.keys(savedRecords).length;
-        alert(`บันทึกข้อมูลสัญญา "${recordKey}" เรียบร้อยแล้ว!`);
+        alert(`บันทึกข้อมูลสำเร็จ!\nรายการ: ${recordKey}`);
       } catch (e) {
-        alert("คำเตือน: พื้นที่ความจำในเครื่องเต็ม กรุณากดปุ่ม 'สำรองไฟล์' เพื่อเก็บประวัติไว้ แล้วลบข้อมูลในคลังออกบางส่วน");
+        alert("คำเตือน: พื้นที่ความจำในเครื่องเต็ม (LocalStorage) กรุณากดปุ่ม 'สำรองไฟล์' เก็บไว้ แล้วลบประวัติเก่าๆ ออกบ้างครับ");
       }
     }
 
@@ -749,8 +731,12 @@
       const tbody = document.getElementById('historyTableBody');
       const search = (document.getElementById('historySearch').value || '').toLowerCase();
       tbody.innerHTML = '';
-      const keys = Object.keys(savedRecords);
-      if (keys.length === 0) { tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#94a3b8; padding:25px;">ยังไม่มีประวัติการบันทึก</td></tr>`; return; }
+      const keys = Object.keys(savedRecords).reverse(); // เรียงจากล่าสุดไปเก่าสุด
+      
+      if (keys.length === 0) { 
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#94a3b8; padding:25px;">ยังไม่มีประวัติการบันทึก</td></tr>`; 
+        return; 
+      }
 
       keys.forEach(key => {
         const item = savedRecords[key];
@@ -761,7 +747,7 @@
         tr.innerHTML = `
           <td><strong>${item.contractDate || '-'}</strong><br><small style="color:#64748b;">${item.savedAt || ''}</small></td>
           <td><span style="font-weight:600; color:#1e293b;">${item.cust || '-'}</span><br><small style="color:#64748b;">โทร. ${item.custPhone || '-'}</small></td>
-          <td><small>${item.siteAddr || '-'}</small><br><span style="color:#c92a2a; font-size:0.8rem;">${item.work || ''}</span></td>
+          <td><small>${item.siteAddr || '-'}</small></td>
           <td style="text-align:center; white-space:nowrap;">
             <button class="btn btn-history" style="padding:4px 8px; font-size:0.75rem;" onclick="loadRecord('${key}')">เปิด</button>
             <button class="btn-danger-sm" style="padding:4px 8px;" onclick="deleteRecord('${key}')"><i class="fa-solid fa-trash"></i></button>
@@ -780,7 +766,7 @@
     }
 
     function deleteRecord(key) {
-      if (confirm(`ยืนยันการลบประวัติของ "${key}" หรือไม่?`)) {
+      if (confirm(`ยืนยันการลบประวัติของ\n"${key}" หรือไม่?`)) {
         delete savedRecords[key];
         localStorage.setItem('warranty_records', JSON.stringify(savedRecords));
         document.getElementById('historyCount').innerText = Object.keys(savedRecords).length;
